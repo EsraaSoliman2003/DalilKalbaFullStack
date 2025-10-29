@@ -1,0 +1,33 @@
+/* Root variables for colors, gradients, and shadows */
+:root {
+  --primary-dark: #0a1a2f;
+  --primary-dark-light: #0f243f;
+  --accent-blue: #2b7da0;
+  --accent-blue-light: #3a8fb8;
+  --accent-gold: #d9b24c;
+  --accent-gold-light: #e5c46e;
+  --text-light: #f8f9fa;
+  --text-gray: #cfd8dc;
+  --text-gray-light: #e9ecef;
+  --gradient-dark: linear-gradient(135deg, #0a1a2f 0%, #12395f 100%);
+  --gradient-blue: linear-gradient(135deg, #2b7da0 0%, #3a8fb8 100%);
+  --gradient-gold: linear-gradient(135deg, #d9b24c 0%, #e5c46e 100%);
+  --glow-blue: 0 0 30px rgba(43, 125, 160, 0.6);
+  --glow-gold: 0 0 30px rgba(217, 178, 76, 0.6);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Global reset and default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Tajawal', 'Segoe UI', sans-serif;
+}
+
+body {
+  direction: rtl;
+  color: var(--text-light);
+  overflow-x: hidden;
+}
