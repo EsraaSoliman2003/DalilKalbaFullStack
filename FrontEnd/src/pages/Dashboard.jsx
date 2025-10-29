@@ -11,6 +11,7 @@ import {
   Search,
   Eye,
   Calendar,
+  AlertTriangle,
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -27,10 +28,34 @@ const Dashboard = () => {
     IsFeatured: false,
   });
   const [editingId, setEditingId] = useState(null);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    type: "success",
+  });
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [postToDelete, setPostToDelete] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Show snackbar function
+  const showSnackbar = (message, type = "success") => {
+    setSnackbar({
+      open: true,
+      message,
+      type,
+    });
+
+    // Auto hide after 4 seconds
+    setTimeout(() => {
+      setSnackbar((prev) => ({ ...prev, open: false }));
+    }, 4000);
+  };
+
+  // Close snackbar manually
+  const closeSnackbar = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
 
   const fetchPosts = async () => {
     try {
@@ -40,7 +65,7 @@ const Dashboard = () => {
       setFilteredPosts(data);
     } catch (err) {
       console.error(err);
-      setError("فشل في جلب البوستات");
+      showSnackbar("فشل في جلب البوستات", "error");
     } finally {
       setLoading(false);
     }
@@ -86,18 +111,16 @@ const Dashboard = () => {
 
       if (editingId) {
         await API.editAdminPost(editingId, formDataToSend);
-        setSuccess("تم تحديث البوست بنجاح");
+        showSnackbar("تم تحديث البوست بنجاح");
       } else {
         await API.createAdminPost(formDataToSend);
-        setSuccess("تم إضافة البوست بنجاح");
+        showSnackbar("تم إضافة البوست بنجاح");
       }
 
       setShowModal(false);
       fetchPosts();
-      setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
-      setError(err.message || "حدث خطأ أثناء الحفظ");
-      setTimeout(() => setError(""), 5000);
+      showSnackbar(err.message || "حدث خطأ أثناء الحفظ", "error");
     }
   };
 
@@ -107,17 +130,28 @@ const Dashboard = () => {
     setShowModal(true);
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("هل أنت متأكد من حذف هذا البوست؟")) return;
+  const openDeleteModal = (post) => {
+    setPostToDelete(post);
+    setShowDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+    setPostToDelete(null);
+  };
+
+  const handleDelete = async () => {
+    if (!postToDelete) return;
+    
     try {
-      await API.deleteAdminPost(id);
+      await API.deleteAdminPost(postToDelete.Id);
       fetchPosts();
-      setSuccess("تم حذف البوست بنجاح");
-      setTimeout(() => setSuccess(""), 3000);
+      showSnackbar("تم حذف البوست بنجاح");
+      closeDeleteModal();
     } catch (err) {
       console.error(err);
-      setError("حدث خطأ أثناء الحذف");
-      setTimeout(() => setError(""), 5000);
+      showSnackbar("حدث خطأ أثناء الحذف", "error");
+      closeDeleteModal();
     }
   };
 
@@ -152,6 +186,13 @@ const Dashboard = () => {
     return new Date(dateString).toLocaleDateString("ar-EG", options);
   };
 
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordData, setPasswordData] = useState({
+    username: "",
+    oldPassword: "",
+    newPassword: "",
+  });
+
   return (
     <div className="dashboard-main-container">
       {/* Header */}
@@ -177,6 +218,12 @@ const Dashboard = () => {
           <button className="dashboard-btn-add" onClick={openAddModal}>
             <Plus size={18} />
             إضافة بوست جديد
+          </button>
+          <button
+            className="dashboard-btn-change"
+            onClick={() => setShowPasswordModal(true)}
+          >
+            تغيير الباسوورد
           </button>
         </div>
       </header>
@@ -214,32 +261,6 @@ const Dashboard = () => {
             </span>
           </div>
         </div>
-      </div>
-
-      {/* Alerts */}
-      <div className="dashboard-alerts-container">
-        {error && (
-          <div className="dashboard-alert dashboard-alert-error">
-            <div className="alert-content">
-              <span className="alert-icon">⚠️</span>
-              <span>{error}</span>
-            </div>
-            <button className="alert-close" onClick={() => setError("")}>
-              ×
-            </button>
-          </div>
-        )}
-        {success && (
-          <div className="dashboard-alert dashboard-alert-success">
-            <div className="alert-content">
-              <span className="alert-icon">✅</span>
-              <span>{success}</span>
-            </div>
-            <button className="alert-close" onClick={() => setSuccess("")}>
-              ×
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Posts Section */}
@@ -362,7 +383,7 @@ const Dashboard = () => {
                   </button>
                   <button
                     className="dashboard-btn-delete"
-                    onClick={() => handleDelete(post.Id)}
+                    onClick={() => openDeleteModal(post)}
                   >
                     <Trash2 size={16} />
                     حذف
@@ -374,7 +395,75 @@ const Dashboard = () => {
         )}
       </section>
 
-      {/* Modal */}
+      {/* Snackbar */}
+      <div
+        className={`snackbar ${snackbar.type} ${
+          snackbar.open ? "snackbar-show" : ""
+        }`}
+      >
+        <div className="snackbar-content">
+          <span className="snackbar-message">{snackbar.message}</span>
+          <button className="snackbar-close" onClick={closeSnackbar}>
+            ×
+          </button>
+        </div>
+      </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && postToDelete && (
+        <div
+          className="dashboard-modal-overlay"
+          onClick={(e) => {
+            if (e.target.classList.contains("dashboard-modal-overlay")) {
+              closeDeleteModal();
+            }
+          }}
+        >
+          <div className="dashboard-modal delete-confirmation-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="delete-modal-header">
+              <div className="delete-modal-icon">
+                <AlertTriangle size={32} />
+              </div>
+              <h2>تأكيد الحذف</h2>
+            </div>
+
+            <div className="delete-modal-content">
+              <p>هل أنت متأكد من أنك تريد حذف هذا البوست؟</p>
+              <div className="post-to-delete-info">
+                <h4>{postToDelete.Title}</h4>
+                {postToDelete.Content && (
+                  <p className="post-preview">
+                    {postToDelete.Content.length > 100
+                      ? `${postToDelete.Content.substring(0, 100)}...`
+                      : postToDelete.Content}
+                  </p>
+                )}
+              </div>
+              <p className="delete-warning">
+                <strong>تنبيه:</strong> لا يمكن التراجع عن هذا الإجراء بعد التنفيذ.
+              </p>
+            </div>
+
+            <div className="delete-modal-actions">
+              <button
+                className="delete-confirm-btn"
+                onClick={handleDelete}
+              >
+                <Trash2 size={18} />
+                نعم، احذف البوست
+              </button>
+              <button
+                className="delete-cancel-btn"
+                onClick={closeDeleteModal}
+              >
+                إلغاء
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add/Edit Post Modal */}
       {showModal && (
         <div
           className="dashboard-modal-overlay"
@@ -479,6 +568,109 @@ const Dashboard = () => {
                   type="button"
                   className="dashboard-btn-secondary"
                   onClick={cancelEdit}
+                >
+                  إلغاء
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {showPasswordModal && (
+        <div
+          className="dashboard-modal-overlay"
+          onClick={(e) => {
+            if (e.target.classList.contains("dashboard-modal-overlay")) {
+              setShowPasswordModal(false);
+            }
+          }}
+        >
+          <div className="dashboard-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="dashboard-modal-header">
+              <h2>تغيير الباسوورد</h2>
+              <button
+                className="dashboard-modal-close"
+                onClick={() => setShowPasswordModal(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            <form
+              className="dashboard-form"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                try {
+                  await API.changeAdminPassword(passwordData);
+                  showSnackbar("تم تغيير الباسوورد بنجاح");
+                  setShowPasswordModal(false);
+                  setPasswordData({
+                    username: "",
+                    oldPassword: "",
+                    newPassword: "",
+                  });
+                } catch (err) {
+                  showSnackbar(
+                    err.message || "حدث خطأ أثناء تغيير الباسوورد",
+                    "error"
+                  );
+                }
+              }}
+            >
+              <div className="dashboard-form-group">
+                <label>اسم المستخدم</label>
+                <input
+                  type="text"
+                  value={passwordData.username}
+                  onChange={(e) =>
+                    setPasswordData({
+                      ...passwordData,
+                      username: e.target.value,
+                    })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="dashboard-form-group">
+                <label>الباسوورد القديم</label>
+                <input
+                  type="password"
+                  value={passwordData.oldPassword}
+                  onChange={(e) =>
+                    setPasswordData({
+                      ...passwordData,
+                      oldPassword: e.target.value,
+                    })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="dashboard-form-group">
+                <label>الباسوورد الجديد</label>
+                <input
+                  type="password"
+                  value={passwordData.newPassword}
+                  onChange={(e) =>
+                    setPasswordData({
+                      ...passwordData,
+                      newPassword: e.target.value,
+                    })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="dashboard-form-actions">
+                <button type="submit" className="dashboard-btn-primary">
+                  حفظ التغييرات
+                </button>
+                <button
+                  type="button"
+                  className="dashboard-btn-secondary"
+                  onClick={() => setShowPasswordModal(false)}
                 >
                   إلغاء
                 </button>

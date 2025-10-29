@@ -1,7 +1,6 @@
 // src/api/api.js
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-// 🔹 التحقق من انتهاء صلاحية التوكن
 const checkTokenExpiration = () => {
   const expiresAt = localStorage.getItem("expiresAt");
   if (!expiresAt) return false;
@@ -9,17 +8,15 @@ const checkTokenExpiration = () => {
   const now = new Date();
   const expiryDate = new Date(expiresAt);
   if (now >= expiryDate) {
-    // حذف التوكن عند انتهاء الصلاحية
     localStorage.removeItem("token");
     localStorage.removeItem("expiresAt");
-    window.location.href = "/login"; // إعادة التوجيه لصفحة الدخول
+    window.location.href = "/login";
     return true;
   }
   return false;
 };
 
 const request = async (endpoint, options = {}, isFormData = false) => {
-  // تحقق من صلاحية التوكن قبل أي طلب
   if (checkTokenExpiration()) return;
 
   const token = localStorage.getItem("token");
@@ -34,11 +31,17 @@ const request = async (endpoint, options = {}, isFormData = false) => {
     headers,
   });
 
-  // لو التوكن غير صالح أو انتهت الجلسة من السيرفر
   if (response.status === 401) {
+    const currentPath = window.location.pathname;
+
     localStorage.removeItem("token");
     localStorage.removeItem("expiresAt");
-    window.location.href = "/login";
+
+    if (currentPath !== "/login") {
+      window.history.pushState({}, "", "/login");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    }
+
     return;
   }
 
@@ -54,13 +57,17 @@ const request = async (endpoint, options = {}, isFormData = false) => {
 
 // JSON Requests
 const get = (endpoint) => request(endpoint);
-const postJson = (endpoint, data) => request(endpoint, { method: "POST", body: JSON.stringify(data) });
-const putJson = (endpoint, data) => request(endpoint, { method: "PUT", body: JSON.stringify(data) });
+const postJson = (endpoint, data) =>
+  request(endpoint, { method: "POST", body: JSON.stringify(data) });
+const putJson = (endpoint, data) =>
+  request(endpoint, { method: "PUT", body: JSON.stringify(data) });
 const del = (endpoint) => request(endpoint, { method: "DELETE" });
 
 // FormData Requests
-const postForm = (endpoint, data) => request(endpoint, { method: "POST", body: data }, true);
-const putForm = (endpoint, data) => request(endpoint, { method: "PUT", body: data }, true);
+const postForm = (endpoint, data) =>
+  request(endpoint, { method: "POST", body: data }, true);
+const putForm = (endpoint, data) =>
+  request(endpoint, { method: "PUT", body: data }, true);
 
 export const API = {
   // Admin
@@ -68,6 +75,9 @@ export const API = {
   createAdminPost: (data) => postForm("/api/Admin/create", data),
   editAdminPost: (id, data) => putForm(`/api/Admin/edit/${id}`, data),
   deleteAdminPost: (id) => del(`/api/Admin/delete/${id}`),
+
+  // Change Password
+  changeAdminPassword: (data) => postJson("/api/Admin/change-password", data),
 
   // Posts
   getPosts: () => get("/api/Posts"),

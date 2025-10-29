@@ -19,7 +19,6 @@
     font-size: 2rem;
     color: var(--text-light);
     background: rgba(43, 125, 160, 0.15);
-    border: 2px solid var(--accent-blue);
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -37,27 +36,32 @@
     border-color: var(--accent-gold);
 }
 
-.social-icon.snapchat:hover {
+.social-icon.facebook {
+    background-color: #166FE5;
+    color: #fff;
+}
+
+.social-icon.snapchat {
     background-color: #fffc00;
     color: #111;
 }
 
-.social-icon.instagram:hover {
+.social-icon.instagram {
     background: linear-gradient(45deg, #f09433, #bc1888, #833ab4);
     color: #fff;
 }
 
-.social-icon.tiktok:hover {
+.social-icon.tiktok {
     background-color: #010101;
     color: #25f4ee;
 }
 
-.social-icon.twitter:hover {
+.social-icon.twitter {
     background-color: #000;
     color: #fff;
 }
 
-.social-icon.youtube:hover {
+.social-icon.youtube {
     background-color: #ff0000;
     color: #fff;
 }
