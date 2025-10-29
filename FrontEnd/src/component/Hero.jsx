@@ -1,7 +1,29 @@
+import { useEffect, useState } from "react";
 import logoLight from "../assets/logoLight.png";
+import { API } from "../api/api";
 import "../styles/Hero.css";
 
 const Hero = ({ scrollToSection }) => {
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const data = await API.getNews();
+        setNews(data);
+      } catch (error) {
+        console.error("فشل في جلب الأخبار:", error);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+  const newsText =
+    news.length > 0
+      ? news.map((n) => n.text || n.Text).join(" | ")
+      : "📰 لا توجد أخبار حالياً";
+
   return (
     <section id="home">
       <div className="hero">
@@ -12,6 +34,7 @@ const Hero = ({ scrollToSection }) => {
             <div className="shape shape-3"></div>
           </div>
         </div>
+
         <div className="hero-content">
           <div className="hero-text">
             <div className="hero-badge">وجهة الطبيعة والتراث</div>
@@ -25,7 +48,7 @@ const Hero = ({ scrollToSection }) => {
             <div className="hero-actions">
               <button
                 className="btn-primary"
-                onClick={() => scrollToSection("attractions")}
+                onClick={() => scrollToSection("featuredPosts")}
               >
                 اكتشف الأماكن
               </button>
@@ -44,8 +67,8 @@ const Hero = ({ scrollToSection }) => {
             </div>
           </div>
         </div>
-        <div className="scroll-indicator">
-          <div className="scroll-arrow"></div>
+        <div className="news-bar">
+          <div className="news-text">{newsText}</div>
         </div>
       </div>
     </section>

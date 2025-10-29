@@ -82,4 +82,10 @@ export const API = {
   // Posts
   getPosts: () => get("/api/Posts"),
   getPostById: (id) => get(`/api/Posts/${id}`),
+
+  // News
+  getNews: () => get("/api/News"),
+  createNews: (data) => postJson("/api/News/create", data),
+  editNews: (id, data) => putJson(`/api/News/edit/${id}`, data),
+  deleteNews: (id) => del(`/api/News/delete/${id}`),
 };

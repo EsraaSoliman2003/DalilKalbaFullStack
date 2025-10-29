@@ -7,17 +7,15 @@ import {
   FileText,
   Plus,
   Star,
-  Filter,
   Search,
-  Eye,
   Calendar,
   AlertTriangle,
 } from "lucide-react";
 
 const Dashboard = () => {
+  // Posts state
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
-  const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [formData, setFormData] = useState({
     Id: 0,
@@ -27,16 +25,31 @@ const Dashboard = () => {
     VideoUrl: "",
     IsFeatured: false,
   });
+
+  // News state
+  const [news, setNews] = useState([]);
+  const [filteredNews, setFilteredNews] = useState([]);
+  const [newsSearchTerm, setNewsSearchTerm] = useState("");
+  const [newsFormData, setNewsFormData] = useState({
+    Id: 0,
+    Text: "",
+  });
+
   const [editingId, setEditingId] = useState(null);
+  const [editingNewsId, setEditingNewsId] = useState(null);
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
     type: "success",
   });
   const [showModal, setShowModal] = useState(false);
+  const [showNewsModal, setShowNewsModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showNewsDeleteModal, setShowNewsDeleteModal] = useState(false);
   const [postToDelete, setPostToDelete] = useState(null);
+  const [newsToDelete, setNewsToDelete] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [newsLoading, setNewsLoading] = useState(true);
 
   // Show snackbar function
   const showSnackbar = (message, type = "success") => {
@@ -46,7 +59,6 @@ const Dashboard = () => {
       type,
     });
 
-    // Auto hide after 4 seconds
     setTimeout(() => {
       setSnackbar((prev) => ({ ...prev, open: false }));
     }, 4000);
@@ -57,6 +69,7 @@ const Dashboard = () => {
     setSnackbar((prev) => ({ ...prev, open: false }));
   };
 
+  // Posts functions
   const fetchPosts = async () => {
     try {
       setLoading(true);
@@ -71,19 +84,29 @@ const Dashboard = () => {
     }
   };
 
+  // News functions
+  const fetchNews = async () => {
+    try {
+      setNewsLoading(true);
+      const data = await API.getNews();
+      setNews(data);
+      setFilteredNews(data);
+    } catch (err) {
+      console.error(err);
+      showSnackbar("فشل في جلب الأخبار", "error");
+    } finally {
+      setNewsLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchPosts();
+    fetchNews();
   }, []);
 
-  // فلترة البوستات عند تغيير الفلتر أو البحث
+  // فلترة البوستات عند تغيير البحث
   useEffect(() => {
     let result = posts;
-
-    if (filter === "featured") {
-      result = result.filter((post) => post.IsFeatured);
-    } else if (filter === "regular") {
-      result = result.filter((post) => !post.IsFeatured);
-    }
 
     if (searchTerm) {
       result = result.filter(
@@ -94,7 +117,20 @@ const Dashboard = () => {
     }
 
     setFilteredPosts(result);
-  }, [filter, searchTerm, posts]);
+  }, [searchTerm, posts]);
+
+  // فلترة الأخبار عند تغيير البحث
+  useEffect(() => {
+    let result = news;
+
+    if (newsSearchTerm) {
+      result = result.filter((item) =>
+        item.Text.toLowerCase().includes(newsSearchTerm.toLowerCase())
+      );
+    }
+
+    setFilteredNews(result);
+  }, [newsSearchTerm, news]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -124,10 +160,34 @@ const Dashboard = () => {
     }
   };
 
+  const handleNewsSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (editingNewsId) {
+        await API.editNews(editingNewsId, newsFormData);
+        showSnackbar("تم تحديث الخبر بنجاح");
+      } else {
+        await API.createNews(newsFormData);
+        showSnackbar("تم إضافة الخبر بنجاح");
+      }
+
+      setShowNewsModal(false);
+      fetchNews();
+    } catch (err) {
+      showSnackbar(err.message || "حدث خطأ أثناء الحفظ", "error");
+    }
+  };
+
   const handleEdit = (post) => {
     setFormData(post);
     setEditingId(post.Id);
     setShowModal(true);
+  };
+
+  const handleEditNews = (newsItem) => {
+    setNewsFormData(newsItem);
+    setEditingNewsId(newsItem.Id);
+    setShowNewsModal(true);
   };
 
   const openDeleteModal = (post) => {
@@ -135,14 +195,24 @@ const Dashboard = () => {
     setShowDeleteModal(true);
   };
 
+  const openNewsDeleteModal = (newsItem) => {
+    setNewsToDelete(newsItem);
+    setShowNewsDeleteModal(true);
+  };
+
   const closeDeleteModal = () => {
     setShowDeleteModal(false);
     setPostToDelete(null);
   };
 
+  const closeNewsDeleteModal = () => {
+    setShowNewsDeleteModal(false);
+    setNewsToDelete(null);
+  };
+
   const handleDelete = async () => {
     if (!postToDelete) return;
-    
+
     try {
       await API.deleteAdminPost(postToDelete.Id);
       fetchPosts();
@@ -152,6 +222,21 @@ const Dashboard = () => {
       console.error(err);
       showSnackbar("حدث خطأ أثناء الحذف", "error");
       closeDeleteModal();
+    }
+  };
+
+  const handleNewsDelete = async () => {
+    if (!newsToDelete) return;
+
+    try {
+      await API.deleteNews(newsToDelete.Id);
+      fetchNews();
+      showSnackbar("تم حذف الخبر بنجاح");
+      closeNewsDeleteModal();
+    } catch (err) {
+      console.error(err);
+      showSnackbar("حدث خطأ أثناء الحذف", "error");
+      closeNewsDeleteModal();
     }
   };
 
@@ -168,6 +253,15 @@ const Dashboard = () => {
     });
   };
 
+  const cancelNewsEdit = () => {
+    setEditingNewsId(null);
+    setShowNewsModal(false);
+    setNewsFormData({
+      Id: 0,
+      Text: "",
+    });
+  };
+
   const openAddModal = () => {
     setEditingId(null);
     setFormData({
@@ -181,17 +275,19 @@ const Dashboard = () => {
     setShowModal(true);
   };
 
+  const openAddNewsModal = () => {
+    setEditingNewsId(null);
+    setNewsFormData({
+      Id: 0,
+      Text: "",
+    });
+    setShowNewsModal(true);
+  };
+
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "short", day: "numeric" };
     return new Date(dateString).toLocaleDateString("ar-EG", options);
   };
-
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [passwordData, setPasswordData] = useState({
-    username: "",
-    oldPassword: "",
-    newPassword: "",
-  });
 
   return (
     <div className="dashboard-main-container">
@@ -202,105 +298,122 @@ const Dashboard = () => {
             <FileText size={20} />
             <span>لوحة التحكم</span>
           </div>
-          <h1>إدارة البوستات</h1>
-          <p>قم بإدارة وعرض جميع البوستات في الموقع بسهولة</p>
-        </div>
-        <div className="dashboard-header-actions">
-          <div className="dashboard-search-box">
-            <Search size={18} />
-            <input
-              type="text"
-              placeholder="ابحث في البوستات..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          <button className="dashboard-btn-add" onClick={openAddModal}>
-            <Plus size={18} />
-            إضافة بوست جديد
-          </button>
-          <button
-            className="dashboard-btn-change"
-            onClick={() => setShowPasswordModal(true)}
-          >
-            تغيير الباسوورد
-          </button>
+          <h1>إدارة المحتوى</h1>
+          <p>إدارة الأخبار والبوستات في الموقع</p>
         </div>
       </header>
 
-      {/* Stats Cards */}
-      <div className="dashboard-stats-container">
-        <div className="dashboard-stat-card">
-          <div className="stat-icon total">
-            <FileText size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>إجمالي البوستات</h3>
-            <span className="stat-number">{posts.length}</span>
-          </div>
-        </div>
-        <div className="dashboard-stat-card">
-          <div className="stat-icon featured">
-            <Star size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>البوستات المميزة</h3>
-            <span className="stat-number">
-              {posts.filter((p) => p.IsFeatured).length}
-            </span>
-          </div>
-        </div>
-        <div className="dashboard-stat-card">
-          <div className="stat-icon regular">
-            <Eye size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>البوستات العادية</h3>
-            <span className="stat-number">
-              {posts.filter((p) => !p.IsFeatured).length}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Posts Section */}
+      {/* قسم الأخبار أولاً */}
       <section className="dashboard-posts-section">
         <div className="dashboard-section-header">
           <div className="section-title">
-            <h2>قائمة البوستات</h2>
+            <h2>إدارة الأخبار</h2>
+            <span className="dashboard-posts-count">
+              {filteredNews.length} خبر
+            </span>
+          </div>
+          <div className="section-controls">
+            <div className="dashboard-search-box">
+              <Search size={18} />
+              <input
+                type="text"
+                placeholder="ابحث في الأخبار..."
+                value={newsSearchTerm}
+                onChange={(e) => setNewsSearchTerm(e.target.value)}
+              />
+            </div>
+            <button className="dashboard-btn-add" onClick={openAddNewsModal}>
+              <Plus size={18} />
+              إضافة خبر جديد
+            </button>
+          </div>
+        </div>
+
+        {newsLoading ? (
+          <div className="dashboard-loading">
+            <div className="loading-spinner"></div>
+            <p>جاري تحميل الأخبار...</p>
+          </div>
+        ) : filteredNews.length === 0 ? (
+          <div className="dashboard-empty-state">
+            <h3>لا توجد أخبار</h3>
+            <p>
+              {newsSearchTerm
+                ? "لم نتمكن من العثور على أي أخبار تطابق بحثك"
+                : "لم تقم بإضافة أي أخبار بعد"}
+            </p>
+            {!newsSearchTerm && (
+              <button
+                className="dashboard-btn-add empty-btn"
+                onClick={openAddNewsModal}
+              >
+                <Plus size={18} />
+                إضافة أول خبر
+              </button>
+            )}
+          </div>
+        ) : (
+          <div className="dashboard-news-grid">
+            {filteredNews.map((newsItem) => (
+              <div key={newsItem.Id} className="dashboard-news-card">
+                <div className="news-header">
+                  <h3 className="news-text-dashboard">{newsItem.Text}</h3>
+                  <div className="news-meta">
+                    <span className="news-id">#{newsItem.Id}</span>
+                    {newsItem.CreatedAt && (
+                      <span className="news-date">
+                        <Calendar size={14} />
+                        {formatDate(newsItem.CreatedAt)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="news-actions">
+                  <button
+                    className="dashboard-btn-edit"
+                    onClick={() => handleEditNews(newsItem)}
+                  >
+                    <Pencil size={16} />
+                    تعديل
+                  </button>
+                  <button
+                    className="dashboard-btn-delete"
+                    onClick={() => openNewsDeleteModal(newsItem)}
+                  >
+                    <Trash2 size={16} />
+                    حذف
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* قسم البوستات بعد الأخبار */}
+      <section className="dashboard-posts-section">
+        <div className="dashboard-section-header">
+          <div className="section-title">
+            <h2>إدارة البوستات</h2>
             <span className="dashboard-posts-count">
               {filteredPosts.length} بوست
             </span>
           </div>
-
           <div className="section-controls">
-            <div className="dashboard-filters-container">
-              <Filter size={16} />
-              <button
-                className={`dashboard-filter-btn ${
-                  filter === "all" ? "dashboard-filter-btn-active" : ""
-                }`}
-                onClick={() => setFilter("all")}
-              >
-                الكل
-              </button>
-              <button
-                className={`dashboard-filter-btn ${
-                  filter === "featured" ? "dashboard-filter-btn-active" : ""
-                }`}
-                onClick={() => setFilter("featured")}
-              >
-                المميزة
-              </button>
-              <button
-                className={`dashboard-filter-btn ${
-                  filter === "regular" ? "dashboard-filter-btn-active" : ""
-                }`}
-                onClick={() => setFilter("regular")}
-              >
-                العادية
-              </button>
+            <div className="dashboard-search-box">
+              <Search size={18} />
+              <input
+                type="text"
+                placeholder="ابحث في البوستات..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
+            <button className="dashboard-btn-add" onClick={openAddModal}>
+              <Plus size={18} />
+              إضافة بوست جديد
+            </button>
           </div>
         </div>
 
@@ -409,7 +522,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Delete Confirmation Modal */}
+      {/* Delete Post Confirmation Modal */}
       {showDeleteModal && postToDelete && (
         <div
           className="dashboard-modal-overlay"
@@ -419,12 +532,15 @@ const Dashboard = () => {
             }
           }}
         >
-          <div className="dashboard-modal delete-confirmation-modal" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="dashboard-modal delete-confirmation-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="delete-modal-header">
               <div className="delete-modal-icon">
                 <AlertTriangle size={32} />
               </div>
-              <h2>تأكيد الحذف</h2>
+              <h2>تأكيد حذف البوست</h2>
             </div>
 
             <div className="delete-modal-content">
@@ -440,21 +556,69 @@ const Dashboard = () => {
                 )}
               </div>
               <p className="delete-warning">
-                <strong>تنبيه:</strong> لا يمكن التراجع عن هذا الإجراء بعد التنفيذ.
+                <strong>تنبيه:</strong> لا يمكن التراجع عن هذا الإجراء بعد
+                التنفيذ.
               </p>
             </div>
 
             <div className="delete-modal-actions">
-              <button
-                className="delete-confirm-btn"
-                onClick={handleDelete}
-              >
+              <button className="delete-confirm-btn" onClick={handleDelete}>
                 <Trash2 size={18} />
                 نعم، احذف البوست
               </button>
+              <button className="delete-cancel-btn" onClick={closeDeleteModal}>
+                إلغاء
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete News Confirmation Modal */}
+      {showNewsDeleteModal && newsToDelete && (
+        <div
+          className="dashboard-modal-overlay"
+          onClick={(e) => {
+            if (e.target.classList.contains("dashboard-modal-overlay")) {
+              closeNewsDeleteModal();
+            }
+          }}
+        >
+          <div
+            className="dashboard-modal delete-confirmation-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="delete-modal-header">
+              <div className="delete-modal-icon">
+                <AlertTriangle size={32} />
+              </div>
+              <h2>تأكيد حذف الخبر</h2>
+            </div>
+
+            <div className="delete-modal-content">
+              <p>هل أنت متأكد من أنك تريد حذف هذا الخبر؟</p>
+              <div className="post-to-delete-info">
+                <h4>نص الخبر:</h4>
+                <p className="post-preview">
+                  {newsToDelete.Text.length > 100
+                    ? `${newsToDelete.Text.substring(0, 100)}...`
+                    : newsToDelete.Text}
+                </p>
+              </div>
+              <p className="delete-warning">
+                <strong>تنبيه:</strong> لا يمكن التراجع عن هذا الإجراء بعد
+                التنفيذ.
+              </p>
+            </div>
+
+            <div className="delete-modal-actions">
+              <button className="delete-confirm-btn" onClick={handleNewsDelete}>
+                <Trash2 size={18} />
+                نعم، احذف الخبر
+              </button>
               <button
                 className="delete-cancel-btn"
-                onClick={closeDeleteModal}
+                onClick={closeNewsDeleteModal}
               >
                 إلغاء
               </button>
@@ -577,100 +741,54 @@ const Dashboard = () => {
         </div>
       )}
 
-      {showPasswordModal && (
+      {/* Add/Edit News Modal */}
+      {showNewsModal && (
         <div
           className="dashboard-modal-overlay"
           onClick={(e) => {
             if (e.target.classList.contains("dashboard-modal-overlay")) {
-              setShowPasswordModal(false);
+              cancelNewsEdit();
             }
           }}
         >
           <div className="dashboard-modal" onClick={(e) => e.stopPropagation()}>
             <div className="dashboard-modal-header">
-              <h2>تغيير الباسوورد</h2>
+              <h2>{editingNewsId ? "تعديل الخبر" : "إضافة خبر جديد"}</h2>
               <button
                 className="dashboard-modal-close"
-                onClick={() => setShowPasswordModal(false)}
+                onClick={cancelNewsEdit}
               >
                 ×
               </button>
             </div>
 
-            <form
-              className="dashboard-form"
-              onSubmit={async (e) => {
-                e.preventDefault();
-                try {
-                  await API.changeAdminPassword(passwordData);
-                  showSnackbar("تم تغيير الباسوورد بنجاح");
-                  setShowPasswordModal(false);
-                  setPasswordData({
-                    username: "",
-                    oldPassword: "",
-                    newPassword: "",
-                  });
-                } catch (err) {
-                  showSnackbar(
-                    err.message || "حدث خطأ أثناء تغيير الباسوورد",
-                    "error"
-                  );
-                }
-              }}
-            >
+            <form className="dashboard-form" onSubmit={handleNewsSubmit}>
               <div className="dashboard-form-group">
-                <label>اسم المستخدم</label>
-                <input
-                  type="text"
-                  value={passwordData.username}
+                <label htmlFor="newsText">نص الخبر</label>
+                <textarea
+                  id="newsText"
+                  placeholder="اكتب نص الخبر هنا..."
+                  value={newsFormData.Text}
                   onChange={(e) =>
-                    setPasswordData({
-                      ...passwordData,
-                      username: e.target.value,
-                    })
+                    setNewsFormData({ ...newsFormData, Text: e.target.value })
                   }
                   required
+                  maxLength={300}
+                  rows={4}
                 />
-              </div>
-
-              <div className="dashboard-form-group">
-                <label>الباسوورد القديم</label>
-                <input
-                  type="password"
-                  value={passwordData.oldPassword}
-                  onChange={(e) =>
-                    setPasswordData({
-                      ...passwordData,
-                      oldPassword: e.target.value,
-                    })
-                  }
-                  required
-                />
-              </div>
-
-              <div className="dashboard-form-group">
-                <label>الباسوورد الجديد</label>
-                <input
-                  type="password"
-                  value={passwordData.newPassword}
-                  onChange={(e) =>
-                    setPasswordData({
-                      ...passwordData,
-                      newPassword: e.target.value,
-                    })
-                  }
-                  required
-                />
+                <div className="char-counter">
+                  {newsFormData.Text.length}/300 حرف
+                </div>
               </div>
 
               <div className="dashboard-form-actions">
                 <button type="submit" className="dashboard-btn-primary">
-                  حفظ التغييرات
+                  {editingNewsId ? "تحديث الخبر" : "إضافة الخبر"}
                 </button>
                 <button
                   type="button"
                   className="dashboard-btn-secondary"
-                  onClick={() => setShowPasswordModal(false)}
+                  onClick={cancelNewsEdit}
                 >
                   إلغاء
                 </button>
