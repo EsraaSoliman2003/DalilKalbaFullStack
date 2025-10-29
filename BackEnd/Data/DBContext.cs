@@ -12,6 +12,7 @@ namespace CatBlog.Data
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<News> News { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +25,16 @@ namespace CatBlog.Data
                     Id = 1,
                     Username = "admin",
                     Password = "12345"
+                }
+            );
+
+            // Seed default news
+            modelBuilder.Entity<News>().HasData(
+                new News
+                {
+                    Id = 1,
+                    Text = "افتتاح ممشى كلباء الجديد على الواجهة البحرية",
+                    CreatedAt = new DateTime(2025, 8, 25)
                 }
             );
 
