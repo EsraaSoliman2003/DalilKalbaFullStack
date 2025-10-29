@@ -5078,11 +5078,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Dalil Kalba Full\\backend\\CatBlog.csproj",
+      "projectUniqueName": "D:\\DalilKalbaFullStack\\backend\\CatBlog.csproj",
       "projectName": "CatBlog",
-      "projectPath": "D:\\Dalil Kalba Full\\backend\\CatBlog.csproj",
+      "projectPath": "D:\\DalilKalbaFullStack\\backend\\CatBlog.csproj",
       "packagesPath": "C:\\Users\\Esraa Soliman\\.nuget\\packages\\",
-      "outputPath": "D:\\Dalil Kalba Full\\backend\\obj\\",
+      "outputPath": "D:\\DalilKalbaFullStack\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

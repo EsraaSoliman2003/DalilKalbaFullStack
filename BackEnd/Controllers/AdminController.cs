@@ -41,6 +41,27 @@ namespace CatBlog.Controllers
             return Ok(token);
         }
 
+        [HttpPost("change-password")]
+        [Authorize]
+        public IActionResult ChangePassword([FromBody] ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var admin = _context.Admins.FirstOrDefault(a => a.Username == model.Username);
+            if (admin == null)
+                return NotFound(new { Error = "Admin not found" });
+
+            if (admin.Password != model.OldPassword)
+                return Unauthorized(new { Error = "Old password is incorrect" });
+
+            admin.Password = model.NewPassword;
+            _context.SaveChanges();
+
+            return Ok(new { Message = "Password changed successfully" });
+        }
+
+
         [HttpPost("create")]
         [Authorize]
         public async Task<IActionResult> Create([FromForm] Post post, IFormFile? imageFile)

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kPpzJoZOIAvXmzw9y23c61YU19On7k39fdcGlvZKrdI=",
+  "Hash": "/DI2Pe8uOpSM9+aMOLv9o/OYed+AqUUlM9zsbrjiyrI=",
   "Source": "CatBlog",
   "BasePath": "_content/CatBlog",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "CatBlog\\wwwroot",
       "Source": "CatBlog",
-      "ContentRoot": "D:\\Dalil Kalba Full\\backend\\wwwroot\\",
+      "ContentRoot": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\",
       "BasePath": "_content/CatBlog",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\7e9e5255-a184-4473-8c9f-d87cfece434f.jpg",
+      "Identity": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\7e9e5255-a184-4473-8c9f-d87cfece434f.jpg",
       "SourceId": "CatBlog",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Dalil Kalba Full\\backend\\wwwroot\\",
+      "ContentRoot": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\",
       "BasePath": "_content/CatBlog",
       "RelativePath": "images/7e9e5255-a184-4473-8c9f-d87cfece434f#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -38,10 +38,10 @@
       "OriginalItemSpec": "wwwroot\\images\\7e9e5255-a184-4473-8c9f-d87cfece434f.jpg"
     },
     {
-      "Identity": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\84eb2e4d-492d-4c8e-98bb-3b5410898475.jpg",
+      "Identity": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\84eb2e4d-492d-4c8e-98bb-3b5410898475.jpg",
       "SourceId": "CatBlog",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Dalil Kalba Full\\backend\\wwwroot\\",
+      "ContentRoot": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\",
       "BasePath": "_content/CatBlog",
       "RelativePath": "images/84eb2e4d-492d-4c8e-98bb-3b5410898475#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -59,10 +59,10 @@
       "OriginalItemSpec": "wwwroot\\images\\84eb2e4d-492d-4c8e-98bb-3b5410898475.jpg"
     },
     {
-      "Identity": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\b37eab8c-9ebb-4c08-95da-e9fe58068f7d.jpg",
+      "Identity": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\b37eab8c-9ebb-4c08-95da-e9fe58068f7d.jpg",
       "SourceId": "CatBlog",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Dalil Kalba Full\\backend\\wwwroot\\",
+      "ContentRoot": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\",
       "BasePath": "_content/CatBlog",
       "RelativePath": "images/b37eab8c-9ebb-4c08-95da-e9fe58068f7d#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -80,10 +80,10 @@
       "OriginalItemSpec": "wwwroot\\images\\b37eab8c-9ebb-4c08-95da-e9fe58068f7d.jpg"
     },
     {
-      "Identity": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\ca03fc03-dc4b-445c-95d2-1b226e094923.jpg",
+      "Identity": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\ca03fc03-dc4b-445c-95d2-1b226e094923.jpg",
       "SourceId": "CatBlog",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Dalil Kalba Full\\backend\\wwwroot\\",
+      "ContentRoot": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\",
       "BasePath": "_content/CatBlog",
       "RelativePath": "images/ca03fc03-dc4b-445c-95d2-1b226e094923#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -101,10 +101,10 @@
       "OriginalItemSpec": "wwwroot\\images\\ca03fc03-dc4b-445c-95d2-1b226e094923.jpg"
     },
     {
-      "Identity": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\ec9f0e6d-153b-4763-95d9-e0800d072cf0.jpg",
+      "Identity": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\ec9f0e6d-153b-4763-95d9-e0800d072cf0.jpg",
       "SourceId": "CatBlog",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Dalil Kalba Full\\backend\\wwwroot\\",
+      "ContentRoot": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\",
       "BasePath": "_content/CatBlog",
       "RelativePath": "images/ec9f0e6d-153b-4763-95d9-e0800d072cf0#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -122,10 +122,10 @@
       "OriginalItemSpec": "wwwroot\\images\\ec9f0e6d-153b-4763-95d9-e0800d072cf0.jpg"
     },
     {
-      "Identity": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\f03e32e2-0d9d-45f2-9981-202366c26558.jpg",
+      "Identity": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\f03e32e2-0d9d-45f2-9981-202366c26558.jpg",
       "SourceId": "CatBlog",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Dalil Kalba Full\\backend\\wwwroot\\",
+      "ContentRoot": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\",
       "BasePath": "_content/CatBlog",
       "RelativePath": "images/f03e32e2-0d9d-45f2-9981-202366c26558#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
@@ -146,7 +146,7 @@
   "Endpoints": [
     {
       "Route": "images/7e9e5255-a184-4473-8c9f-d87cfece434f.7k2rte40km.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\7e9e5255-a184-4473-8c9f-d87cfece434f.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\7e9e5255-a184-4473-8c9f-d87cfece434f.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -191,7 +191,7 @@
     },
     {
       "Route": "images/7e9e5255-a184-4473-8c9f-d87cfece434f.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\7e9e5255-a184-4473-8c9f-d87cfece434f.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\7e9e5255-a184-4473-8c9f-d87cfece434f.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -228,7 +228,7 @@
     },
     {
       "Route": "images/84eb2e4d-492d-4c8e-98bb-3b5410898475.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\84eb2e4d-492d-4c8e-98bb-3b5410898475.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\84eb2e4d-492d-4c8e-98bb-3b5410898475.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -265,7 +265,7 @@
     },
     {
       "Route": "images/84eb2e4d-492d-4c8e-98bb-3b5410898475.lokdilqwc2.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\84eb2e4d-492d-4c8e-98bb-3b5410898475.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\84eb2e4d-492d-4c8e-98bb-3b5410898475.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -310,7 +310,7 @@
     },
     {
       "Route": "images/b37eab8c-9ebb-4c08-95da-e9fe58068f7d.hf4ycuy5e0.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\b37eab8c-9ebb-4c08-95da-e9fe58068f7d.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\b37eab8c-9ebb-4c08-95da-e9fe58068f7d.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -355,7 +355,7 @@
     },
     {
       "Route": "images/b37eab8c-9ebb-4c08-95da-e9fe58068f7d.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\b37eab8c-9ebb-4c08-95da-e9fe58068f7d.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\b37eab8c-9ebb-4c08-95da-e9fe58068f7d.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -392,7 +392,7 @@
     },
     {
       "Route": "images/ca03fc03-dc4b-445c-95d2-1b226e094923.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\ca03fc03-dc4b-445c-95d2-1b226e094923.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\ca03fc03-dc4b-445c-95d2-1b226e094923.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -429,7 +429,7 @@
     },
     {
       "Route": "images/ca03fc03-dc4b-445c-95d2-1b226e094923.mj9hy0zes9.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\ca03fc03-dc4b-445c-95d2-1b226e094923.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\ca03fc03-dc4b-445c-95d2-1b226e094923.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -474,7 +474,7 @@
     },
     {
       "Route": "images/ec9f0e6d-153b-4763-95d9-e0800d072cf0.1xjd3o0ils.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\ec9f0e6d-153b-4763-95d9-e0800d072cf0.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\ec9f0e6d-153b-4763-95d9-e0800d072cf0.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -519,7 +519,7 @@
     },
     {
       "Route": "images/ec9f0e6d-153b-4763-95d9-e0800d072cf0.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\ec9f0e6d-153b-4763-95d9-e0800d072cf0.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\ec9f0e6d-153b-4763-95d9-e0800d072cf0.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -556,7 +556,7 @@
     },
     {
       "Route": "images/f03e32e2-0d9d-45f2-9981-202366c26558.id8t4nzyvm.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\f03e32e2-0d9d-45f2-9981-202366c26558.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\f03e32e2-0d9d-45f2-9981-202366c26558.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -601,7 +601,7 @@
     },
     {
       "Route": "images/f03e32e2-0d9d-45f2-9981-202366c26558.jpg",
-      "AssetFile": "D:\\Dalil Kalba Full\\backend\\wwwroot\\images\\f03e32e2-0d9d-45f2-9981-202366c26558.jpg",
+      "AssetFile": "D:\\DalilKalbaFullStack\\backend\\wwwroot\\images\\f03e32e2-0d9d-45f2-9981-202366c26558.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
