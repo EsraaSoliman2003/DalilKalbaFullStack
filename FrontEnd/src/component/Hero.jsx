@@ -26,6 +26,9 @@ const Hero = ({ scrollToSection }) => {
 
   return (
     <section id="home">
+              <div className="news-bar">
+          <div className="news-text">{newsText}</div>
+        </div>
       <div className="hero">
         <div className="hero-background">
           <div className="floating-shapes">
@@ -34,6 +37,8 @@ const Hero = ({ scrollToSection }) => {
             <div className="shape shape-3"></div>
           </div>
         </div>
+
+
 
         <div className="hero-content">
           <div className="hero-text">
@@ -66,9 +71,6 @@ const Hero = ({ scrollToSection }) => {
               <div className="orb-glow"></div>
             </div>
           </div>
-        </div>
-        <div className="news-bar">
-          <div className="news-text">{newsText}</div>
         </div>
       </div>
     </section>
