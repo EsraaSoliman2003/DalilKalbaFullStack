@@ -1,4 +1,4 @@
-﻿using CatBlog.Data;
+using DalilKalba.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -32,7 +32,7 @@ builder.Services.AddCors(options =>
 });
 
 // Add DbContext
-builder.Services.AddDbContext<CatBlogContext>(options =>
+builder.Services.AddDbContext<DalilKalbaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add JWT Authentication

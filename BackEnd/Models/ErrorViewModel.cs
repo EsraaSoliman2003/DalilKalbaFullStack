@@ -1,4 +1,4 @@
-namespace CatBlog.Models
+namespace DalilKalba.Models
 {
     public class ErrorViewModel
     {

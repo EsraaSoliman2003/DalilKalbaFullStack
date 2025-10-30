@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
-using CatBlog.Data;
+using DalilKalba.Data;
 
-namespace CatBlog.Controllers
+namespace DalilKalba.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private readonly CatBlogContext _context;
-        public PostsController(CatBlogContext context) => _context = context;
+        private readonly DalilKalbaContext _context;
+        public PostsController(DalilKalbaContext context) => _context = context;
 
         [HttpGet]
         public IActionResult GetAll()

@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using CatBlog.Data;
-using CatBlog.Models;
+using DalilKalba.Data;
+using DalilKalba.Models;
 
-namespace CatBlog.Controllers
+namespace DalilKalba.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class NewsController : ControllerBase
     {
-        private readonly CatBlogContext _context;
+        private readonly DalilKalbaContext _context;
 
-        public NewsController(CatBlogContext context)
+        public NewsController(DalilKalbaContext context)
         {
             _context = context;
         }

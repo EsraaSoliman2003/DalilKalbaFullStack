@@ -25,24 +25,24 @@
       "PackagePath": "staticwebassets\\images\\f03e32e2-0d9d-45f2-9981-202366c26558.jpg"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.CatBlog.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.DalilKalba.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.CatBlog.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.DalilKalba.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.CatBlog.props",
-      "PackagePath": "build\\CatBlog.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.DalilKalba.props",
+      "PackagePath": "build\\DalilKalba.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.CatBlog.props",
-      "PackagePath": "buildMultiTargeting\\CatBlog.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.DalilKalba.props",
+      "PackagePath": "buildMultiTargeting\\DalilKalba.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.CatBlog.props",
-      "PackagePath": "buildTransitive\\CatBlog.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.DalilKalba.props",
+      "PackagePath": "buildTransitive\\DalilKalba.props"
     }
   ],
   "ElementsToRemove": []

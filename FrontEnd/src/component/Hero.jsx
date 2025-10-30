@@ -22,7 +22,7 @@ const Hero = ({ scrollToSection }) => {
   const newsText =
     news.length > 0
       ? news.map((n) => n.text || n.Text).join(" | ")
-      : "📰 لا توجد أخبار حالياً";
+      : "لا توجد أخبار حالياً";
 
   return (
     <section id="home">

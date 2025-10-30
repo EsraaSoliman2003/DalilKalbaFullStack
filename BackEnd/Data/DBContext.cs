@@ -1,14 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using CatBlog.Models;
+using DalilKalba.Models;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
-namespace CatBlog.Data
+namespace DalilKalba.Data
 {
-    public class CatBlogContext : DbContext
+    public class DalilKalbaContext : DbContext
     {
-        public CatBlogContext(DbContextOptions<CatBlogContext> options) : base(options) { }
+        public DalilKalbaContext(DbContextOptions<DalilKalbaContext> options) : base(options) { }
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<Admin> Admins { get; set; }

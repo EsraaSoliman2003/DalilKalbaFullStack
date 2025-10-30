@@ -45,8 +45,6 @@ const Posts = ({ id, featured, posts, error, loading }) => {
           </p>
         </div>
 
-        {error && <p className="error">{error}</p>}
-
         <div className="posts-grid">
           {posts.length > 0 ? (
             posts

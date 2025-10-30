@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CatBlog.Models
+namespace DalilKalba.Models
 {
     public class LoginViewModel
     {

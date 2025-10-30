@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using CatBlog.Data;
-using CatBlog.Models;
+using DalilKalba.Data;
+using DalilKalba.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,18 +8,18 @@ using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;   // <-- أضيفي هذا
 
-namespace CatBlog.Controllers
+namespace DalilKalba.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly CatBlogContext _context;
+        private readonly DalilKalbaContext _context;
         private readonly IConfiguration _config;
         private readonly IWebHostEnvironment _env;   // <-- معلن عنه هنا
 
         // <-- عدّلي الـ constructor ليستقبل IWebHostEnvironment
-        public AdminController(CatBlogContext context, IConfiguration config, IWebHostEnvironment env)
+        public AdminController(DalilKalbaContext context, IConfiguration config, IWebHostEnvironment env)
         {
             _context = context;
             _config = config;
