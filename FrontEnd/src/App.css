@@ -1,7 +1,9 @@
+/* App.css */
+
 /* Main app container */
 .App {
   min-height: 100vh;
-  background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(15, 35, 60, 0.0)), url("/src/assets/mountains.jpg") no-repeat center center;
+  background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(15, 35, 60, 0.0)), url("/mountains.jpg") no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
   position: relative;
