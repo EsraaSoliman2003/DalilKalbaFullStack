@@ -13,7 +13,6 @@ import "./App.css";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./component/PrivateRoute";
 import { API } from "./api/api";
-import mountainsBg from "./assets/mountains.jpg";
 
 const App = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -69,17 +68,7 @@ const App = () => {
   };
 
   return (
-    <div
-      className="App"
-      style={{
-        backgroundImage: `linear-gradient(rgba(10, 25, 47, 0.9), rgba(15, 35, 60, 0.0)), url(${mountainsBg})`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="App">
       {location.pathname !== "/login" && (
         <Header
           isScrolled={isScrolled}
