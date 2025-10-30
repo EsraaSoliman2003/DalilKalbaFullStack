@@ -43,17 +43,28 @@ namespace DalilKalba.Data
                 new Post
                 {
                     Id = 1,
-                    Title = "Cute Cat Sleeping",
-                    Content = "This is a cute cat taking a nap in the sun.",
-                    ImageUrl = "https://i.pinimg.com/1200x/2e/a9/33/2ea933dbf75a6b85472899202e55d2d3.jpg",
+                    Title = "محمية القرم",
+                    Content = "واحدة من أهم المحميات الطبيعية في الدولة وتضم تنوعاً بيئياً غنياً.",
+                    IsFeatured = False,
+                    ImageUrl = "https://images.pexels.com/photos/6780348/pexels-photo-6780348.jpeg",
                     CreatedAt = new DateTime(2025, 8, 25)
                 },
                 new Post
                 {
                     Id = 2,
-                    Title = "Playful Kitten",
-                    Content = "A playful kitten enjoying some toys.",
-                    ImageUrl = "https://i.pinimg.com/736x/11/d0/7d/11d07d167d79721d75ae651c367e96b0.jpg",
+                    Title = "شاطئ كلباء",
+                    Content = "شاطئ هادئ يتميز بمياهه النقية وإطلالاته الرائعة على خليج عمان.",
+                    IsFeatured = False,
+                    ImageUrl = "https://www.propertyfinder.ae/blog/wp-content/uploads/2025/06/01-72.webp",
+                    CreatedAt = new DateTime(2025, 8, 25)
+                },
+                new Post
+                {
+                    Id = 3,
+                    Title = "بحيرة كلباء",
+                    Content = "بحيرة كلباء هادئة وجميلة تحيط بها الطبيعة الخلابة",
+                    IsFeatured = False,
+                    ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Kalba_Fort.jpg/500px-Kalba_Fort.jpg",
                     CreatedAt = new DateTime(2025, 8, 25)
                 }
             );
