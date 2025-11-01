@@ -25,11 +25,18 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // React Vite dev server
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins(
+            "http://localhost:5173",
+            "https://dalil-kalba.vercel.app",
+            "https://dlil-kalba.vercel.app",
+            "https://dalilkalba.vercel.app",
+            "https://dlilkalba.vercel.app",
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
+
 
 // Add DbContext
 builder.Services.AddDbContext<DalilKalbaContext>(options =>
