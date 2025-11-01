@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
             "https://dalil-kalba.vercel.app",
             "https://dlil-kalba.vercel.app",
             "https://dalilkalba.vercel.app",
-            "https://dlilkalba.vercel.app",
+            "https://dlilkalba.vercel.app"
         )
         .AllowAnyHeader()
         .AllowAnyMethod();
