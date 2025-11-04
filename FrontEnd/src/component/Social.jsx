@@ -1,4 +1,5 @@
-import { Facebook, Ghost } from "lucide-react";
+import { Facebook, Ghost, Instagram, Twitter, Music } from "lucide-react";
+import { FaTiktok, FaThreads } from "react-icons/fa6";
 import "../styles/Social.css";
 
 const Social = () => {
@@ -7,9 +8,17 @@ const Social = () => {
       <div className="section-header">
         <h2>تابعنا على</h2>
         <div className="section-divider"></div>
-        {/* <p>اكتشف جميع البوستات العادية</p> */}
       </div>
+
       <div className="social-icons">
+        <a
+          href="https://www.tiktok.com/@dlil.kalba"
+          target="_blank"
+          rel="noreferrer"
+          className="social-icon tiktok"
+        >
+          <FaTiktok size={28} />
+        </a>
         <a
           href="https://www.facebook.com/dlil.kalba"
           target="_blank"
@@ -25,6 +34,30 @@ const Social = () => {
           className="social-icon snapchat"
         >
           <Ghost size={28} />
+        </a>
+        <a
+          href="https://x.com/dlilkalba?s=21"
+          target="_blank"
+          rel="noreferrer"
+          className="social-icon twitter"
+        >
+          <Twitter size={28} />
+        </a>
+        <a
+          href="https://www.instagram.com/dlil_kalba/"
+          target="_blank"
+          rel="noreferrer"
+          className="social-icon instagram"
+        >
+          <Instagram size={28} />
+        </a>
+        <a
+          href="https://www.threads.com/@dlil_kalba"
+          target="_blank"
+          rel="noreferrer"
+          className="social-icon threads"
+        >
+          <FaThreads size={28} />
         </a>
       </div>
     </section>

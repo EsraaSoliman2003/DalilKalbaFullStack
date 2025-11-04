@@ -66,6 +66,12 @@
     color: #fff;
 }
 
+.social-icon.threads {
+    background: linear-gradient(135deg, #000, #4E4E4E);
+    color: #fff;
+}
+
+
 @media (max-width: 480px) {
     .social-icon {
         width: 50px;
