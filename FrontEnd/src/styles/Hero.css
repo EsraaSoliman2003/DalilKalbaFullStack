@@ -33,7 +33,7 @@
   display: inline-block;
   white-space: nowrap;
   animation: scrollNews 80s linear infinite;
-  padding-right: 100%;
+  /* padding-right: 100%; */
   color: #2c3e50;
   font-weight: 700;
 }
