@@ -12,47 +12,39 @@
 
 /* News Bar Styles - Now at the top */
 .news-bar {
-  background: linear-gradient(to right, #caa65a, #f0d68a);
-  font-weight: 600;
-  text-align: center;
-  padding: 12px 0;
-  font-size: 1.1rem;
-  border-top: 2px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
   width: 100%;
-  border-radius: 15px;
-  margin: 25px 0;
-  z-index: 4;
-  position: relative;
-  box-shadow: 0 4px 15px rgba(202, 166, 90, 0.3);
   overflow: hidden;
+  background: linear-gradient(to right, #caa65a, #f0d68a);
+  padding: 12px 0;
+  border-radius: 15px;
+  position: relative;
   direction: ltr;
 }
 
-/* الحامل اللي بيتحرّك */
 .news-track {
-  display: inline-block;
+  display: flex;
   white-space: nowrap;
   will-change: transform;
-  animation: scrollNews 30s linear infinite;
+  animation: scroll-left 20s linear infinite;
 }
 
-/* النص نفسه */
 .news-text {
-  color: #2c3e50;
+  padding: 0 50px;
   font-weight: 700;
+  color: #2c3e50;
+  font-size: 1.1rem;
 }
 
-/* حركة أبسط ومتوافقة أكثر مع iOS */
-@keyframes scrollNews {
-  from {
+/* الحركة — من الشمال لليمين */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
     transform: translateX(100%);
   }
-
-  to {
-    transform: translateX(-100%);
-  }
 }
+
 
 
 

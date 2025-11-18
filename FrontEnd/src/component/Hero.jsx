@@ -29,11 +29,13 @@ const Hero = ({ scrollToSection }) => {
     <section id="home">
       <div className="hero">
         {/* News Bar - Moved to the very top */}
-        <div className="news-bar">
-          <div className="news-track">
-            <span className="news-text">{newsText}</span>
-          </div>
-        </div>
+<div className="news-bar">
+  <div className="news-track">
+    <span className="news-text">{newsText}</span>
+    <span className="news-text">{newsText}</span>
+  </div>
+</div>
+
 
         {/* Client Section - Below news bar */}
         <div className="client-section">
