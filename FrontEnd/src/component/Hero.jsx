@@ -29,30 +29,21 @@ const Hero = ({ scrollToSection }) => {
     <section id="home">
       <div className="hero">
         {/* News Bar - Moved to the very top */}
-<div className="news-bar">
-  <div className="news-track">
-    <span className="news-text">{newsText}</span>
-    <span className="news-text">{newsText}</span>
-  </div>
-</div>
-
+        <div className="news-bar">
+          <div className="news-text">{newsText}</div>
+        </div>
 
         {/* Client Section - Below news bar */}
         <div className="client-section">
           <div className="client-content">
             <div className="client-image-container">
-              <img
-                src={clientImage}
-                alt="محمد - مؤسس منصة دليل كلباء"
-                className="client-image"
-              />
+              <img src={clientImage} alt="محمد - مؤسس منصة دليل كلباء" className="client-image" />
             </div>
             <div className="client-text">
               <p>
-                مؤسس منصة دليل كلباء منذ عام 2015، وواحد من أبرز صُنّاع المحتوى
-                المحلي في مدينة كلباء. تخصّص في توثيق الأحداث والفعاليات الرسمية
-                والمجتمعية، وساهم في إبراز هوية المدينة السياحية والتراثية عبر
-                تغطيات دقيقة واحترافية.
+                مؤسس منصة دليل كلباء منذ عام 2015، وواحد من أبرز صُنّاع المحتوى المحلي في مدينة كلباء. 
+                تخصّص في توثيق الأحداث والفعاليات الرسمية والمجتمعية، وساهم في إبراز هوية المدينة السياحية 
+                والتراثية عبر تغطيات دقيقة واحترافية.
               </p>
             </div>
           </div>
