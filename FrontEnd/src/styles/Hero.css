@@ -12,39 +12,39 @@
 
 /* News Bar Styles - Now at the top */
 .news-bar {
-  width: 100%;
-  overflow: hidden;
   background: linear-gradient(to right, #caa65a, #f0d68a);
+  font-weight: 600;
+  text-align: center;
   padding: 12px 0;
+  font-size: 1.1rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
   border-radius: 15px;
+  margin: 25px 0;
+  z-index: 4;
   position: relative;
+  box-shadow: 0 4px 15px rgba(202, 166, 90, 0.3);
+  overflow: hidden;
   direction: ltr;
 }
 
-.news-track {
-  display: flex;
-  white-space: nowrap;
-  will-change: transform;
-  animation: scroll-left 20s linear infinite;
-}
-
 .news-text {
-  padding: 0 50px;
-  font-weight: 700;
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollNews 30s linear infinite;
   color: #2c3e50;
-  font-size: 1.1rem;
+  font-weight: 700;
 }
 
-/* الحركة — من الشمال لليمين */
-@keyframes scroll-left {
+@keyframes scrollNews {
   0% {
-    transform: translateX(0);
+    transform: translateX(-100%);
   }
   100% {
     transform: translateX(100%);
   }
 }
-
 
 
 
