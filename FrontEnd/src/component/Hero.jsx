@@ -62,7 +62,7 @@ const Hero = ({ scrollToSection }) => {
             <div className="hero-badge">وجهة الطبيعة والتراث</div>
             <h1 className="hero-title">
               <span className="title-main">دليل كلباء</span>
-              <span className="title-sub">جوهرة الساحل الشرقي</span>
+              <span className="title-sub">درة الشرق</span>
             </h1>
             <p className="hero-subtitle">
               حيث يلتقي البحر بالجبل، والطبيعة بالتاريخ في إمارة الشارقة
